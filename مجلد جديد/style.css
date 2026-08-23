@@ -1,0 +1,408 @@
+/* ================= 1. المتغيرات والألوان (طابع رومانسي دافئ) ================= */
+:root {
+    --bg-color: #fff0f5;          /* لون خلفية وردي حالم */
+    --primary-pink: #d81b60;      /* لون الحب العميق (فوشيا داكن) */
+    --soft-pink: #f8bbd0;         /* وردي ناعم للبطاقات */
+    --gold-accent: #d4af37;       /* ذهبي للمسات الملكية */
+    --rose-gold: #960017;         /* أحمر وردي داكن للتفاصيل */
+    --text-dark: #4a0e2e;         /* لون نص داكن مريح للعين */
+    --glass-bg: rgba(255, 255, 255, 0.65); /* خلفية زجاجية شفافة */
+}
+
+/* ================= 2. الإعدادات العامة ================= */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+    background-image: url('https://www.transparenttextures.com/patterns/dust.png');
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--soft-pink), var(--primary-pink)); border-radius: 10px; }
+
+.elegant-font { font-family: 'Aref Ruqaa', serif; font-weight: 700; }
+.deep-text { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 1.9; }
+.hidden { display: none !important; }
+
+/* تأثيرات الظهور عند التمرير */
+.hidden-reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.5,0,0,1); }
+.active-reveal { opacity: 1; transform: translateY(0); }
+
+/* ================= 3. جسيمات الخلفية (القلوب والنجوم) ================= */
+#particles-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+}
+.particle {
+    position: absolute;
+    animation: particleFloat linear infinite;
+    opacity: 0;
+    user-select: none;
+}
+@keyframes particleFloat {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+/* ================= 4. شاشة القفل والترحيب ================= */
+#lock-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: linear-gradient(135deg, #fce4ec 0%, #f48fb1 50%, #fce4ec 100%);
+    background-size: 200% 200%;
+    animation: bgShift 6s ease infinite;
+    display: flex; justify-content: center; align-items: center; z-index: 9999;
+    transition: opacity 1s ease, transform 1s ease;
+}
+@keyframes bgShift {
+    0%,100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+.lock-content {
+    text-align: center; padding: 55px 60px;
+    background: rgba(255,255,255,0.5); border-radius: 35px;
+    backdrop-filter: blur(20px); border: 2px solid rgba(255,255,255,0.7);
+    box-shadow: 0 25px 60px rgba(216,27,96,0.2);
+    position: relative; overflow: hidden;
+}
+.lock-icon { font-size: 5.5rem; color: var(--gold-accent); margin-bottom: 20px; display: block; }
+.lock-content h1 { color: var(--primary-pink); font-size: 3.2rem; margin-bottom: 12px; }
+.lock-content p  { font-size: 1.15rem; color: var(--text-dark); margin-bottom: 35px; line-height: 1.8; }
+
+.magic-btn {
+    padding: 15px 45px; font-size: 1.2rem; font-family: 'Cairo', sans-serif; font-weight: bold;
+    color: white; background: linear-gradient(45deg, var(--primary-pink), #ff4081, var(--rose-gold));
+    background-size: 200% 200%; border: none; border-radius: 50px; cursor: pointer;
+    box-shadow: 0 10px 25px rgba(216,27,96,0.35); transition: all 0.4s ease;
+    animation: gradientShift 3s ease infinite; position: relative; z-index: 1;
+}
+.magic-btn:hover { transform: translateY(-5px) scale(1.06); box-shadow: 0 18px 35px rgba(216,27,96,0.5); }
+
+/* الشاشة السينمائية */
+#intro-screen {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: radial-gradient(ellipse at center, #1a0511 0%, #0d020a 100%);
+    display: flex; justify-content: center; align-items: center; z-index: 9998;
+    transition: opacity 1s ease;
+}
+#intro-text { color: var(--soft-pink); font-size: 2.8rem; text-align: center; padding: 30px; line-height: 1.6; }
+.cursor { animation: blink 0.8s infinite; color: var(--gold-accent); }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ================= 5. الهيكل الأساسي ================= */
+#main-content { padding-bottom: 80px; position: relative; z-index: 1; }
+.section-padding { max-width: 1100px; margin: 90px auto; padding: 0 25px; }
+.section-title { text-align: center; font-size: 2.8rem; color: var(--primary-pink); margin-bottom: 15px; }
+.instruction { text-align: center; color: var(--rose-gold); margin-bottom: 40px; font-size: 1.1rem; }
+
+/* ================= 6. الهيرو (الواجهة الرئيسية) ================= */
+.hero-section {
+    height: 75vh; display: flex; align-items: center; justify-content: center; text-align: center;
+    background: radial-gradient(ellipse at center, rgba(248,187,208,0.6) 0%, transparent 75%);
+    position: relative; overflow: hidden;
+}
+.hero-overlay { position: relative; z-index: 2; }
+.pre-title { font-size: 1.5rem; color: var(--rose-gold); margin-bottom: -10px; }
+.main-name {
+    font-size: 9rem; color: var(--primary-pink);
+    text-shadow: 4px 4px 0px white, 6px 6px 20px rgba(216,27,96,0.2);
+    letter-spacing: 3px; animation: namePulse 3s ease-in-out infinite;
+}
+@keyframes namePulse {
+    0%,100% { text-shadow: 4px 4px 0px white, 6px 6px 20px rgba(216,27,96,0.2); }
+    50%      { text-shadow: 4px 4px 0px white, 6px 6px 35px rgba(216,27,96,0.5); }
+}
+.subtitle { font-size: 1.4rem; color: var(--text-dark); background: white; display: inline-block; padding: 8px 25px; border-radius: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.07); margin-top: 15px; }
+
+/* ================= 7. عداد الحب والصداقة ================= */
+.counter-box { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; }
+.counter-item {
+    background: white; padding: 30px 25px; border-radius: 24px; min-width: 160px; text-align: center;
+    box-shadow: 0 12px 30px rgba(216,27,96,0.1); border: 2px solid var(--soft-pink);
+    transition: transform 0.3s ease;
+}
+.counter-item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(216,27,96,0.2); }
+.counter-item span { font-size: 3.5rem; color: var(--primary-pink); font-weight: bold; }
+.counter-item p { margin-top: 10px; color: var(--rose-gold); font-weight: 600; }
+
+/* ================= 8. رسائل وأسباب الحب ================= */
+.message-container {
+    background: white; padding: 55px; border-radius: 35px; text-align: center; position: relative;
+    box-shadow: 0 20px 50px rgba(216,27,96,0.1); border: 2px dashed var(--soft-pink);
+}
+.quote-icon { font-size: 3rem; color: var(--gold-accent); opacity: 0.25; position: absolute; top: 25px; right: 35px; }
+
+.reasons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px; }
+.reason-card {
+    background: var(--glass-bg); padding: 45px 25px; border-radius: 24px; text-align: center;
+    backdrop-filter: blur(12px); border: 2px solid rgba(255,255,255,0.8);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.06); transition: transform 0.4s ease;
+}
+.reason-card:hover { transform: translateY(-12px); background: white; }
+.reason-card i { font-size: 3.5rem; color: var(--rose-gold); margin-bottom: 18px; display: block; }
+.reason-card h3 { color: var(--primary-pink); margin-bottom: 12px; font-size: 1.5rem; }
+
+/* ================= 9. شريط الذكريات (الزمني) ================= */
+.timeline-box { position: relative; max-width: 850px; margin: 0 auto; border-right: 4px dashed var(--soft-pink); padding-right: 40px; }
+.timeline-node {
+    position: relative; margin-bottom: 40px; background: white; padding: 30px; border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.06); border: 2px solid var(--soft-pink);
+}
+.timeline-node::before {
+    content: ''; position: absolute; right: -50px; top: 24px; width: 22px; height: 22px;
+    background: var(--primary-pink); border: 4px solid white; border-radius: 50%;
+    box-shadow: 0 0 15px rgba(216,27,96,0.5);
+}
+.timeline-node h3 { color: var(--primary-pink); font-family: 'Aref Ruqaa', serif; font-size: 1.8rem; margin-bottom: 10px; }
+
+/* ================= 10. شمعة الأمنيات السحرية ================= */
+.candle-wrapper {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(to bottom, #2a081a, #4a0e2e); padding: 50px 20px; 
+    border-radius: 35px; box-shadow: inset 0 0 50px rgba(0,0,0,0.6); position: relative; border: 4px solid var(--gold-accent);
+}
+.candle-scene { position: relative; width: 120px; height: 260px; margin-bottom: 30px; margin-top: 40px; }
+.candle-body {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 160px;
+    background: linear-gradient(to right, #e8d3df 0%, #ffffff 40%, #e8d3df 80%, #dcb9cb 100%);
+    border-radius: 8px 8px 12px 12px; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1), 0 15px 25px rgba(0,0,0,0.5);
+}
+.candle-drip { position: absolute; background: #fff; border-radius: 50px; }
+.d1 { top: 5px; left: 12px; width: 8px; height: 35px; }
+.d2 { top: 0px; right: 18px; width: 6px; height: 50px; }
+.d3 { top: 15px; left: 35px; width: 7px; height: 25px; }
+.candle-wick { position: absolute; bottom: 158px; left: 50%; transform: translateX(-50%); width: 4px; height: 18px; background: #222; border-radius: 2px 2px 0 0; }
+.candle-glow {
+    position: absolute; top: -120px; left: 50%; transform: translateX(-50%); width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(255, 200, 100, 0.35) 0%, rgba(255, 100, 150, 0.1) 40%, transparent 70%);
+    border-radius: 50%; pointer-events: none; animation: glowPulse 2s infinite alternate; transition: opacity 1s ease;
+}
+@keyframes glowPulse { 0% { opacity: 0.8; transform: translateX(-50%) scale(0.95); } 100% { opacity: 1; transform: translateX(-50%) scale(1.05); } }
+.flame-wrap { position: absolute; bottom: 172px; left: 50%; transform: translateX(-50%); width: 26px; height: 50px; transition: all 0.5s ease; transform-origin: bottom; }
+.flame-outer, .flame-inner, .flame-core {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 50% 0 50% 50%; transform: rotate(-45deg); animation: flicker 0.1s infinite alternate;
+}
+.flame-outer { background: rgba(255, 140, 0, 0.9); box-shadow: 0 0 25px rgba(255, 140, 0, 0.8); }
+.flame-inner { background: rgba(255, 215, 0, 0.9); width: 70%; height: 70%; left: 15%; bottom: 10%; }
+.flame-core { background: #fff; width: 40%; height: 40%; left: 30%; bottom: 20%; }
+@keyframes flicker { 0% { transform: rotate(-45deg) scaleY(1); } 100% { transform: rotate(-45deg) scaleY(1.05) skewX(2deg); } }
+.smoke-wrap { position: absolute; bottom: 175px; left: 50%; transform: translateX(-50%); width: 30px; height: 120px; opacity: 0; pointer-events: none; }
+.smoke { position: absolute; bottom: 0; left: 50%; width: 12px; height: 12px; background: rgba(220, 220, 220, 0.6); border-radius: 50%; filter: blur(4px); opacity: 0; }
+.smoke.active { animation: smokeRise 3s ease-out forwards; }
+.s1 { animation-delay: 0s; } .s2 { animation-delay: 0.4s; } .s3 { animation-delay: 0.8s; }
+@keyframes smokeRise { 0% { transform: translateX(-50%) translateY(0) scale(1); opacity: 0.8; } 100% { transform: translateX(calc(-50% + 25px)) translateY(-120px) scale(4); opacity: 0; } }
+
+.wish-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; animation: fadeIn 1s forwards; }
+.wish-prompt { color: white; font-size: 2rem; margin-bottom: 15px; }
+#wishText { 
+    width: 100%; height: 120px; padding: 15px; border-radius: 20px; border: 2px solid var(--soft-pink); 
+    background: rgba(255,255,255,0.95); font-family: 'Cairo'; font-size: 1.1rem; resize: none; margin-bottom: 15px; outline: none; 
+}
+#wishText:focus { border-color: var(--primary-pink); box-shadow: 0 0 15px rgba(216,27,96,0.6); }
+.wish-saved { text-align: center; color: white; background: rgba(255,255,255,0.15); padding: 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); animation: fadeIn 1s forwards; width: 100%; max-width: 450px; }
+.wish-star-icon { font-size: 3.5rem; color: var(--gold-accent); margin-bottom: 15px; animation: pulseStar 1.5s infinite alternate; }
+@keyframes pulseStar { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.2); opacity: 1; filter: drop-shadow(0 0 20px var(--gold-accent)); } }
+@keyframes fadeIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* ================= 11. يوميات الحب السرية (الدفتر) ================= */
+.diary-book { background: #fdf5e6; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); padding: 30px; position: relative; overflow: hidden; border: 2px solid #e0c8b0; }
+.diary-pages-container { display: flex; justify-content: center; }
+.diary-spread { display: none; gap: 20px; width: 100%; animation: fadeIn 0.5s; }
+.diary-spread.active { display: flex; }
+.diary-page { flex: 1; background: white; padding: 30px 20px; border-radius: 5px; box-shadow: inset 0 0 15px rgba(0,0,0,0.03); min-height: 250px; border: 1px solid #eee; }
+.page-lines { border-bottom: 2px solid var(--soft-pink); margin-bottom: 20px; }
+.page-date { color: var(--primary-pink); margin-bottom: 10px; font-size: 1.5rem; }
+.page-text { font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); }
+.page-doodle { font-size: 2rem; text-align: center; margin-top: 20px; opacity: 0.6; }
+.diary-nav { text-align: center; margin-top: 20px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+.diary-nav-btn { background: var(--primary-pink); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+.diary-nav-btn:hover { background: var(--rose-gold); transform: scale(1.1); }
+.diary-page-num { font-weight: bold; color: var(--text-dark); font-size: 1.2rem; }
+.diary-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary-pink); z-index: 10; display: flex; align-items: center; justify-content: center; transition: 1s transform ease; transform-origin: right; color: white; text-align: center; cursor: pointer; }
+.diary-cover:hover { background: var(--rose-gold); }
+.diary-cover.open { transform: rotateY(180deg); pointer-events: none; opacity: 0; }
+.cover-icon { font-size: 4rem; margin-bottom: 15px; color: var(--gold-accent); }
+
+/* ================= 12. شجرة العائلة الرأسية (المثالية للموبايل) ================= */
+.v-tree { position: relative; max-width: 500px; margin: 0 auto; padding: 20px 0; z-index: 1; }
+.v-trunk { position: absolute; top: 40px; bottom: 60px; left: 50%; width: 6px; background: #d4a0b0; transform: translateX(-50%); border-radius: 10px; z-index: -2; }
+.v-branch-horizontal { position: absolute; top: 35px; left: 15%; right: 15%; height: 6px; background: #d4a0b0; z-index: -1; border-radius: 10px; }
+.parents-level .v-branch-horizontal { left: 25%; right: 25%; }
+.v-level { display: flex; position: relative; margin-bottom: 45px; z-index: 2; }
+.center-level { justify-content: center; }
+.parents-level { justify-content: center; gap: 50px; }
+.split-level { justify-content: space-between; padding: 0 20px; }
+
+.family-card { text-align: center; width: 90px; cursor: pointer; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.family-card:hover { transform: scale(1.15); z-index: 10; }
+.fc-avatar { width: 70px; height: 70px; background: white; border: 4px solid var(--soft-pink); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2.2rem; margin: 0 auto; box-shadow: 0 8px 15px rgba(216,27,96,0.15); transition: border-color 0.3s ease; }
+.family-card:hover .fc-avatar { border-color: var(--primary-pink); }
+.fc-main-avatar { width: 90px !important; height: 90px !important; border: 5px solid var(--gold-accent) !important; background: linear-gradient(135deg, var(--primary-pink), var(--soft-pink)) !important; color: white; font-size: 2.8rem !important; animation: pulseAvatar 2s infinite; }
+@keyframes pulseAvatar { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.6); } 70% { box-shadow: 0 0 0 20px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+.fc-cat { border-color: #f39c12 !important; }
+.fc-name { margin-top: 10px; font-weight: 700; font-size: 0.95rem; background: rgba(255,255,255,0.95); padding: 5px 12px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid var(--soft-pink); }
+
+/* النافذة المنبثقة الصلبة بدون تشويش */
+.fc-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); background: rgba(255, 255, 255, 0.98); padding: 40px 30px; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); border: 3px solid var(--primary-pink); width: 85%; max-width: 380px; text-align: center; z-index: 100000; opacity: 0; visibility: hidden; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.fc-popup.show { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
+.fc-popup-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.8rem; color: #aaa; cursor: pointer; }
+.fc-popup-close:hover { color: var(--primary-pink); }
+.fc-popup-emoji { font-size: 4.5rem; margin-bottom: 10px; animation: bounceEmoji 2s infinite; }
+@keyframes bounceEmoji { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.fc-popup-name { color: var(--primary-pink); font-size: 2.2rem; margin-bottom: 15px; }
+.fc-popup-msg { font-size: 1.15rem; line-height: 1.7; font-weight: 600; }
+.fc-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: 99999; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+.fc-overlay.show { opacity: 1; visibility: visible; }
+
+/* ================= 13. البطاقات القلابة (الأسرار والمجهول) ================= */
+.flip-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; perspective: 1000px; }
+.flip-card { height: 230px; cursor: pointer; }
+.flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.9s cubic-bezier(0.4,0.2,0.2,1); transform-style: preserve-3d; }
+.flip-card:hover .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 24px; display: flex; justify-content: center; align-items: center; padding: 25px; box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+.flip-front { background: linear-gradient(135deg, var(--rose-gold), var(--primary-pink)); color: white; font-size: 2rem; font-family: 'Aref Ruqaa', serif; border: 3px solid white; flex-direction: column; }
+.flip-back  { background: white; color: var(--text-dark); transform: rotateY(180deg); font-family: 'Amiri', serif; font-size: 1.3rem; border: 2px solid var(--primary-pink); }
+
+/* ================= 14. متحف المحادثات وقائمة الأغاني ================= */
+.chat-gallery { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.chat-shot { width: 260px; border-radius: 20px; cursor: pointer; transition: transform 0.4s, box-shadow 0.4s; box-shadow: 0 10px 25px rgba(0,0,0,0.12); }
+.chat-shot:hover { transform: scale(1.06) rotate(-1deg); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+
+.mock-spotify-container { background: #1a0511; border-radius: 28px; padding: 35px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); max-width: 750px; margin: 0 auto; }
+.song-item { display: flex; align-items: center; justify-content: space-between; padding: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); color: white; transition: background 0.3s; border-radius: 12px; }
+.song-item:hover { background: rgba(255,255,255,0.08); cursor: pointer; }
+.song-item:last-child { border-bottom: none; }
+.play-icon { font-size: 2.5rem; color: var(--soft-pink); transition: color 0.3s, transform 0.3s; }
+.song-item:hover .play-icon { color: var(--primary-pink); transform: scale(1.1); }
+.song-info { flex-grow: 1; padding: 0 20px; text-align: right; }
+.heart-icon { font-size: 1.5rem; color: var(--primary-pink); cursor: pointer; transition: transform 0.3s; }
+.heart-icon:hover { transform: scale(1.3); }
+
+/* ================= 15. معرض البولارويد واختبار BFF ================= */
+.masonry-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 35px; padding: 20px 0; }
+.polaroid-frame { background: white; padding: 15px 15px 45px 15px; box-shadow: 0 12px 35px rgba(0,0,0,0.15); width: 280px; transition: transform 0.4s, z-index 0s, box-shadow 0.4s; position: relative; cursor: pointer; }
+.polaroid-frame img { width: 100%; height: 250px; object-fit: cover; background: #eee; }
+.polaroid-caption { font-family: 'Aref Ruqaa', serif; font-size: 1.4rem; color: var(--text-dark); text-align: center; position: absolute; bottom: 8px; left: 0; width: 100%; }
+.polaroid-frame:nth-child(odd)  { transform: rotate(-3deg); }
+.polaroid-frame:nth-child(even) { transform: rotate(4deg); }
+.polaroid-frame:hover { transform: scale(1.1) rotate(0deg); z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.25); }
+
+.quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+.secret-image-box { position: relative; width: 100%; height: 360px; border-radius: 24px; overflow: hidden; border: 4px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
+.blurred-photo { width: 100%; height: 100%; object-fit: cover; filter: blur(30px); transition: filter 1.5s ease; }
+.quiz-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(252,228,236,0.88); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; backdrop-filter: blur(5px); transition: opacity 0.5s ease; }
+.quiz-overlay p { font-size: 1.2rem; font-weight: bold; color: var(--primary-pink); margin-bottom: 18px; padding: 0 10px; }
+.answer-input { padding: 13px 22px; border-radius: 30px; border: 2px solid var(--soft-pink); width: 88%; font-size: 1rem; text-align: center; margin-bottom: 15px; outline: none; }
+.unlock-photo-btn { background: var(--primary-pink); color: white; border: none; padding: 13px 32px; border-radius: 30px; font-size: 1.1rem; cursor: pointer; transition: all 0.3s; font-weight: bold; }
+
+/* ================= 16. بطاقات المسح ================= */
+.scratch-cards-wrapper { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+.scratch-card { position: relative; width: 100%; max-width: 620px; height: 165px; border-radius: 24px; overflow: hidden; background: white; border: 3px dashed var(--soft-pink); box-shadow: 0 12px 25px rgba(0,0,0,0.07); }
+.gift-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 25px; background: linear-gradient(135deg, #fff9fc, #fff0f5); }
+.gift-content h3 { color: var(--primary-pink); font-size: 1.6rem; margin-bottom: 8px; }
+.scratch-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; cursor: crosshair; }
+
+/* ================= 17. عجلة الحظ (6 هدايا بمسافات ممتازة) ================= */
+.royal-gift { text-align: center; }
+.gift-box { background: white; padding: 50px 30px; border-radius: 35px; box-shadow: 0 20px 50px rgba(216,27,96,0.12); border: 2px dashed var(--soft-pink); margin-bottom: 60px; }
+
+/* تم تكبير الحاوية لتتسع للكلمات الطويلة */
+#wheel-container { position: relative; width: 350px; height: 350px; margin: 35px auto; overflow: visible; }
+
+.pointer { position: absolute; top: -28px; left: 50%; transform: translateX(-50%); font-size: 2.8rem; z-index: 10; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); animation: pointerBounce 1s ease-in-out infinite; }
+@keyframes pointerBounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-5px); } }
+
+.wheel {
+    width: 100%; height: 100%; border-radius: 50%; border: 8px solid var(--primary-pink); position: relative; overflow: hidden;
+    box-shadow: 0 0 30px rgba(216,27,96,0.3), 0 15px 40px rgba(0,0,0,0.2), inset 0 0 20px rgba(255,255,255,0.15);
+    /* 6 أجزاء (كل 60 درجة) */
+    background: conic-gradient(
+        #f8bbd0 0deg 60deg,
+        #ffffff 60deg 120deg,
+        #fce4ec 120deg 180deg,
+        #ffe0eb 180deg 240deg,
+        #f48fb1 240deg 300deg,
+        #ffb6c1 300deg 360deg 
+    );
+}
+
+.wheel-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border-radius: 50%; background: white; border: 4px solid var(--primary-pink); box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 5; }
+
+.segment {
+    position: absolute; top: 0; left: 50%; width: 2px; height: 50%; transform-origin: bottom;
+    transform: translateX(-50%) rotate(calc((var(--i) - 1) * 60deg + 30deg)); z-index: 2;
+}
+
+/* تعديل الخطوط والموضع للكلمات لتجنب الاقتطاع */
+.segment span {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    writing-mode: vertical-rl; text-orientation: mixed;
+    color: var(--text-dark); font-weight: bold; font-size: 0.9rem; font-family: 'Cairo'; white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.9);
+}
+
+#giftMessage { margin-top: 35px; animation: scaleUp 0.6s ease forwards; }
+#won-gift { color: var(--gold-accent); font-size: 2.4rem; margin-bottom: 12px; font-family: 'Aref Ruqaa', serif; text-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
+
+/* ================= 18. الوعود والرسالة الصوتية ================= */
+.promise-box { background: linear-gradient(160deg, white 0%, var(--bg-color) 100%); padding: 55px; border-radius: 35px; box-shadow: 0 15px 40px rgba(0,0,0,0.07); text-align: center; border-top: 5px solid var(--primary-pink); }
+.promises-list { list-style: none; text-align: right; display: inline-block; margin-bottom: 35px; }
+.promises-list li { font-size: 1.3rem; margin-bottom: 18px; color: var(--text-dark); }
+.promises-list i  { color: var(--primary-pink); margin-left: 10px; font-size: 1.1rem; }
+.elegant-divider { border: 0; height: 2px; background: linear-gradient(to left, transparent, var(--soft-pink), transparent); margin: 35px 0; }
+.final-love { font-family: 'Aref Ruqaa', serif; font-size: 2rem; color: var(--primary-pink); margin-bottom: 30px; }
+
+.voice-note-section { margin-top: 25px; }
+.play-voice-btn { background: var(--gold-accent); color: white; border: none; padding: 16px 40px; border-radius: 50px; font-size: 1.3rem; font-family: 'Cairo'; cursor: pointer; transition: all 0.4s; box-shadow: 0 10px 25px rgba(212,175,55,0.45); }
+.play-voice-btn i { margin-left: 10px; }
+.play-voice-btn:hover { background: var(--primary-pink); transform: scale(1.06); box-shadow: 0 12px 30px rgba(216,27,96,0.45); }
+.play-voice-btn.playing { animation: pulseGlow 1.5s infinite; background: var(--primary-pink); }
+
+/* ================= 19. زر الإعجاب (تفاعل القلب) ================= */
+.like-btn { background: transparent; border: none; font-size: 2rem; color: #ddd; cursor: pointer; margin-top: 18px; transition: color 0.3s, transform 0.2s; outline: none; }
+.like-btn:hover { color: var(--soft-pink); transform: scale(1.15); }
+.like-btn.liked  { color: var(--primary-pink); animation: heartPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+@keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.6); } 100% { transform: scale(1); } }
+.final-like { font-size: 2.8rem; margin-bottom: 20px; }
+
+/* ================= 20. التذييل ================= */
+footer { text-align: center; padding: 35px; background: linear-gradient(135deg, var(--soft-pink), #fce4ec); color: var(--text-dark); font-size: 1.1rem; margin-top: 60px; font-weight: bold; border-top: 3px solid white; }
+
+/* ================= 21. التجاوب مع شاشات الهواتف ================= */
+@media screen and (max-width: 768px) {
+    .main-name { font-size: 5.5rem; }
+    .message-container { padding: 35px 20px; }
+    .masonry-grid { flex-direction: column; align-items: center; }
+    .polaroid-frame { width: 92%; max-width: 360px; }
+    .polaroid-frame:nth-child(odd), .polaroid-frame:nth-child(even) { transform: none; }
+    .play-voice-btn { padding: 13px 22px; font-size: 1.1rem; width: 100%; }
+    .lock-content { padding: 40px 30px; }
+    
+    /* ضبط مساحات شجرة العائلة */
+    .v-branch-horizontal { left: 10%; right: 10%; }
+    .parents-level .v-branch-horizontal { left: 20%; right: 20%; }
+    .parents-level { gap: 30px; }
+    .split-level { padding: 0 10px; }
+    .fc-avatar { width: 60px; height: 60px; font-size: 1.8rem; }
+    .fc-main-avatar { width: 80px !important; height: 80px !important; font-size: 2.4rem !important; }
+    .fc-name { font-size: 0.85rem; padding: 4px 10px; }
+    
+    /* ضبط العجلة للموبايل لاستيعاب الكلمات */
+    #wheel-container { width: 300px; height: 300px; } 
+    .segment span { font-size: 0.85rem; top: 6px; } 
+    
+    /* ضبط الدفتر للموبايل */
+    .diary-spread { flex-direction: column; }
+    .diary-page { min-height: auto; }
+}

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد مريوم 👑</title>
+    
+    <!-- الخطوط الراقية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:ital@0;1&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ملف التصميم -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- جسيمات الخلفية -->
+    <div id="particles-bg"></div>
+
+    <!-- موسيقى الخلفية (الروقان) -->
+    <audio id="bg-music" loop>
+        <source src="videoplayback (5).mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ========== شاشة القفل ========== -->
+    <div id="lock-screen" class="girly-theme">
+        <div class="lock-content">
+            <i class="fa-solid fa-crown fa-bounce lock-icon"></i>
+            <h1 class="elegant-font">إلى الأميرة مريم 👑</h1>
+            <p>بعض الأصدقاء ليسوا مجرد أصدقاء.. هم عائلة اختارها القلب.<br>اضغطي لفتح عالمنا السري..</p>
+            <button id="unlock-btn" class="magic-btn">✨ افتحي ياجمل بنوته ✨</button>
+        </div>
+    </div>
+
+    <!-- ========== الشاشة السينمائية (الآلة الكاتبة) ========== -->
+    <div id="intro-screen" class="hidden">
+        <h1 id="intro-text" class="elegant-font"></h1>
+    </div>
+
+    <!-- ========== المحتوى الرئيسي ========== -->
+    <div id="main-content" class="hidden">
+
+        <!-- 1. الهيرو (الواجهة الرئيسية) -->
+        <header class="hero-section">
+            <div class="hero-overlay">
+                <p class="pre-title">اليوم كبرت جميلتي..</p>
+                <h1 class="main-name elegant-font">8 \ 28</h1>
+                <h1 class="main-name elegant-font">مريم</h1>
+                <p class="subtitle">صديقتي، أختي، واجمل بنت 🌸</p>
+            </div>
+        </header>
+
+        <!-- 2. عداد الصداقة -->
+        <section class="friendship-counter section-padding">
+            <h2 class="section-title elegant-font">بقالي من يوم ما عرفتك </h2>
+            <div class="counter-box">
+                <div class="counter-item">
+                    <span id="days">0</span>
+                    <p>يوم</p>
+                </div>
+                <div class="counter-item">
+                    <span id="hours">0</span>
+                    <p>ساعة</p>
+                </div>
+                <div class="counter-item">
+                    <span id="minutes">0</span>
+                    <p>دقيقة</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. رسالة توأم الروح -->
+        <section class="soulmate-message section-padding">
+            <div class="message-container aesthetic-border">
+                <i class="fa-solid fa-quote-right quote-icon"></i>
+                <h2 class="section-title elegant-font">ليست مجرد صديقة 💖</h2>
+                <p class="deep-text">يقولون أن الصداقة مواقف، وأنا أقول أن الصداقة هي "أنتِ". لم تكوني يوماً مجرد صديقة نتبادل معها الأحاديث، بل كنتِ الأخت التي رزقني الله بها في زحام الحياة. في هذا اليوم، لم تولد صديقتي فقط، بل وُلد النصف الآخر لروحي. كل عام وأنتِ الأقرب لقلبي يا <strong>مريم</strong>.</p>
+                <!-- زر الإعجاب -->
+                <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+            </div>
+        </section>
+
+        <!-- 4. شريط الذكريات -->
+        <section class="timeline-section section-padding">
+            <h2 class="section-title elegant-font">شريط ذكرياتنا ⏳</h2>
+            <p class="instruction">أيام حفرت مكانها في قلبي مستحيل أنساها</p>
+            <div class="timeline-box">
+                <div class="timeline-node">
+                    <h3>أول يوم شفتك فيه 👀</h3>
+                    <p class="deep-text">اول مرة شفتك فيها كانت في امتحان الفينال لفل 4. اليوم ده مميز جداً رغم إنه مكنتش اعرفك وقتها كويس بس انتِ اللى خليتِ ليه القيمة الحقيقية.. تفتكري كنتِ زعلانة ليه؟ 😂😂😂😂</p>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <div class="timeline-node">
+                    <h3>أول تعارف ما بيننا 🤝</h3>
+                    <p class="deep-text">27 \ 5 \ 2025 — أول تعارف ما بينا. تفتكري يوم بعتي في الجروب وكنتِ خايفة إزاي؟ 😂😂😂</p>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <div class="timeline-node">
+                    <h3>أول كلام حقيقي ما بينا 💬</h3>
+                    <p class="deep-text">الساعة 1 في الليل يوم 4 \ 1 \ 2026 — أول مكالمة ما بينا بجد. عرّفتِني فيها بـ 90% من حياتي! 😂😂</p>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. شمعة الأمنيات -->
+        <section class="candle-section section-padding">
+            <h2 class="section-title elegant-font">شمعة أمنياتك 🕯️</h2>
+            <p class="instruction">اضغطي على الشمعة.. أطفئيها وتمني أمنية من قلبك</p>
+            <div class="candle-wrapper">
+                <div class="candle-scene" id="candleScene">
+                    <div class="flame-wrap" id="flameWrap">
+                        <div class="flame-outer"></div>
+                        <div class="flame-inner"></div>
+                        <div class="flame-core"></div>
+                    </div>
+                    <div class="smoke-wrap" id="smokeWrap">
+                        <div class="smoke s1"></div>
+                        <div class="smoke s2"></div>
+                        <div class="smoke s3"></div>
+                    </div>
+                    <div class="candle-wick"></div>
+                    <div class="candle-body">
+                        <div class="candle-drip d1"></div>
+                        <div class="candle-drip d2"></div>
+                        <div class="candle-drip d3"></div>
+                        <div class="candle-glow" id="candleGlow"></div>
+                    </div>
+                    <div class="candle-base"></div>
+                </div>
+                <button class="candle-btn magic-btn" id="candleBtn">🌬️ انفخي وتمني</button>
+                <div class="wish-form hidden" id="wishForm">
+                    <p class="wish-prompt elegant-font">اكتبي أمنيتك السرية.. 🤍</p>
+                    <textarea id="wishText" placeholder="يا رب أتمنى..."></textarea>
+                    <button class="magic-btn" id="saveWish">احفظي الأمنية ✨</button>
+                </div>
+                <div class="wish-saved hidden" id="wishSaved">
+                    <i class="fa-solid fa-star wish-star-icon"></i>
+                    <p class="wish-saved-text elegant-font">أمنيتك طارت للسما.. يا رب تتحقق 🌟</p>
+                    <div class="saved-wish-display" id="savedWishDisplay"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 7. شجرة عائلة مريم (رأسية ومتجاوبة للموبايل) -->
+        <section class="family-tree-section section-padding">
+            <h2 class="section-title elegant-font">عائلة مريم الحلوة 🌳</h2>
+            <p class="instruction">كل اللي بتحبيهم في مكان واحد — اضغطي على أي شخص</p>
+
+            <div class="v-tree">
+                <!-- جذع الشجرة الرأسي -->
+                <div class="v-trunk"></div>
+
+                <!-- المستوى الأول: الآباء -->
+                <div class="v-level parents-level">
+                    <div class="v-branch-horizontal"></div>
+                    <div class="family-card fc-dad" data-name="أبوها عصام" data-msg="الرجل اللي علّمك إن الحياة جميلة بالصبر والثقة — يسلم على طول يا أبو مريم 🤴" data-emoji="👨‍👧">
+                        <div class="fc-avatar">👨</div>
+                        <div class="fc-name">عصام</div>
+                    </div>
+                    <div class="family-card fc-mom" data-name="أمها الغالية" data-msg="اللي ربّتك على الكرم والطيبة — ربنا يحفظها ويخليها ليكِ دايماً 🤍" data-emoji="👩‍👧">
+                        <div class="fc-avatar">👩</div>
+                        <div class="fc-name">أمها</div>
+                    </div>
+                </div>
+
+                <!-- المستوى الثاني: مريم (في المنتصف) -->
+                <div class="v-level center-level">
+                    <div class="family-card fc-mariam" data-name="مريم 👑" data-msg="البطلة والأميرة والنجمة — عيد ميلاد سعيد يا أجمل واحدة في العالم! ✨🎂" data-emoji="👑">
+                        <div class="fc-avatar fc-main-avatar">م</div>
+                        <div class="fc-name">مريم ✨</div>
+                    </div>
+                </div>
+
+                <!-- المستوى الثالث: الأخوات -->
+                <div class="v-level split-level">
+                    <div class="v-branch-horizontal"></div>
+                    <div class="family-card fc-donia" data-name="دنيا" data-msg="أختك الكبيرة — اللي بتحمي وبتدعم من وراكِ دايماً 💜" data-emoji="👭">
+                        <div class="fc-avatar">👧</div>
+                        <div class="fc-name">دنيا</div>
+                    </div>
+                    <div class="family-card fc-salma" data-name="سلمى" data-msg="أختك الحلوة سلمى — زي الهواء خفيفة وبتجيب البسمة 🌸" data-emoji="🌸">
+                        <div class="fc-avatar">👧</div>
+                        <div class="fc-name">سلمى</div>
+                    </div>
+                </div>
+
+                <!-- المستوى الرابع: باقي الإخوة -->
+                <div class="v-level split-level">
+                    <div class="v-branch-horizontal"></div>
+                    <div class="family-card fc-ahmed" data-name="أحمد" data-msg="أخوكِ الولد — ولو بيزعّلك أحياناً بس في الآخر بتحبيه 😄💙" data-emoji="💙">
+                        <div class="fc-avatar">👦</div>
+                        <div class="fc-name">أحمد</div>
+                    </div>
+                    <div class="family-card fc-jana" data-name="جنى" data-msg="جنى — اسمها زي اسمها حلو وبيجيب الفرح في البيت 🌼" data-emoji="🌼">
+                        <div class="fc-avatar">👧</div>
+                        <div class="fc-name">جنى</div>
+                    </div>
+                </div>
+
+                <!-- المستوى الخامس: القطة كيتي -->
+                <div class="v-level center-level">
+                    <div class="family-card fc-kitty" data-name="كيتي 🐱" data-msg="كيتي — عضو العائلة الأهم! بتفهمك من غير كلام وبتحسك لما بتكوني زعلانة 🐾💗" data-emoji="🐱">
+                        <div class="fc-avatar fc-cat">🐱</div>
+                        <div class="fc-name">كيتي</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- النافذة المنبثقة لشجرة العائلة -->
+            <div class="fc-popup hidden" id="fcPopup">
+                <button class="fc-popup-close" id="fcClose"><i class="fa-solid fa-xmark"></i></button>
+                <div class="fc-popup-emoji" id="fcPopupEmoji">👩</div>
+                <h3 class="fc-popup-name elegant-font" id="fcPopupName"></h3>
+                <p class="fc-popup-msg" id="fcPopupMsg"></p>
+            </div>
+        </section>
+
+        <!-- 8. أسباب الصداقة -->
+        <section class="reasons-section section-padding">
+            <h2 class="section-title elegant-font">أشياء تجعلكِ مميزة 🦋</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <i class="fa-solid fa-face-smile-wink"></i>
+                    <h3>روحك الحلوة</h3>
+                    <p>ابتسامتك اللي بتنور أي مكان تدخليه، وطاقتك الإيجابية اللي بتعدي كل اللي حواليكي.</p>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <div class="reason-card">
+                    <i class="fa-solid fa-ear-listen"></i>
+                    <h3>أعظم مستمعة</h3>
+                    <p>لأنك بتسمعيني من قلبك، وبتحسي بيا من غير ما أتكلم.</p>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+                <div class="reason-card">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <h3>سندي الحقيقي</h3>
+                    <p>في كل مرة وقعت فيها، كنتِ أنتِ أول إيد تتمد عشان توقفيني على رجليا من تاني.</p>
+                    <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+  
+
+<section class="playlist-section section-padding">
+    <h2 class="section-title elegant-font">أخترت لك اغاني لعيد ميلادك🎧</h2>
+    <p class="instruction">شغليهم يحلوه بعيد ميلادك</p>
+    <div class="mock-spotify-container">
+        
+        <!-- الأغنية الأولى -->
+        
+<div class="song-item">
+            <!-- ضع رابط الأغنية داخل data-audio -->
+            <i class="fa-solid fa-circle-play play-icon" data-audio="راشد الماجد.mp3"></i>
+            <div class="song-info">
+                <h4>اليوم هذا غير عن كل الاعياد</h4>
+                <p>راشد الماجد</p>
+            </div>
+            <i class="fa-regular fa-heart heart-icon"></i>
+        </div>
+        <!-- الأغنية الثانية -->
+        
+<div class="song-item">
+            <!-- ضع رابط الأغنية داخل data-audio -->
+            <i class="fa-solid fa-circle-play play-icon" data-audio="videoplayback (4).mp3"></i>
+            <div class="song-info">
+                <h4>Happy Birthday Song!!!</h4>
+                <p>Flipsyde</p>
+            </div>
+            <i class="fa-regular fa-heart heart-icon"></i>
+        </div>
+       
+
+    </div>
+</section>
+
+        <!-- 12. رسائل مجهولة -->
+        <section class="anonymous-messages section-padding">
+            <h2 class="section-title elegant-font">رسائل مجهولة من قلوب بتحبك 💌</h2>
+            <p class="instruction">مرّري الماوس على الأظرف عشان تشوفي الرسائل!</p>
+            <div class="flip-cards-grid">
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front"><i class="fa-solid fa-envelope" style="font-size:2.5rem;margin-bottom:10px"></i><br>رسالة #1</div>
+                        <div class="flip-back"><p>"تبقى أحسن واحدة في الدنيا كلها، ويجيها ابن حلال طيب يحافظ عليها، ويرزقها الذرية الصالحة. يا رب بجاه النبي ﷺ وكل عام وأنتِ بخير يا قطعةً من قلبي."</p></div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front"><i class="fa-solid fa-envelope" style="font-size:2.5rem;margin-bottom:10px"></i><br>رسالة #2</div>
+                        <div class="flip-back"><p>"خليكِ دايماً قوية وواثقة في نفسك، لأنك تستاهلي أحسن حاجة في الدنيا."</p></div>
+                    </div>
+                </div>
+                <div class="flip-card">
+                    <div class="flip-inner">
+                        <div class="flip-front"><i class="fa-solid fa-envelope" style="font-size:2.5rem;margin-bottom:10px"></i><br>رسالة #3</div>
+                        <div class="flip-back"><p>"مهما تخانقنا وشدينا ببعض هبقا احبك وهتبقي احب وحده لقلوبنا كلنا."</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. ألبوم صور البولارويد -->
+        <section class="polaroid-gallery section-padding">
+            <h2 class="section-title elegant-font">ألبوم أجدع وحده في الدنيا 📸</h2>
+            <div class="masonry-grid">
+                <div class="polaroid-frame">
+                    <img src="photo1.png" alt="مريوم ">
+                    <p class="polaroid-caption">ذكرياتنا الحلوة 💖</p>
+                </div>
+                <div class="polaroid-frame">
+                    <img src="photo2.png" alt=" مريم">
+                    <p class="polaroid-caption">أحلى خروجة 🌸</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. اختبار الـ BFF (الصور المشفرة) -->
+        <section class="bff-quiz section-padding">
+            <h2 class="section-title elegant-font">اختبار وهدايا ومفاجآت</h2>
+            <p class="instruction">عشان تشوفي الحاجات دي، لازم تجاوبي على الأسئلة!</p>
+            <div class="quiz-grid">
+                <div class="secret-image-box">
+                    <img src="secret1.png" class="blurred-photo" alt="صورة سرية 1">
+                    <div class="quiz-overlay">
+                        <p>مين اكتر حد كرهتي انك عرفتيه؟</p>
+                        <input type="text" placeholder="اكتبي الإجابة..." class="answer-input">
+                        <button class="unlock-photo-btn" data-answer="عبدالله,محمد,روان,احمد">افتحي الصورة ✨</button>
+                    </div>
+                </div>
+                <div class="secret-image-box">
+                    <img src="secret2.png" class="blurred-photo" alt="صورة سرية 2">
+                    <div class="quiz-overlay">
+                        <!-- السؤال التاني اتعدل وبقى هو اللي بيسأل عن الهدية ومربوط بـ id="fav-gift-btn" -->
+                        <p>إيه أكتر هدية نفسك فيها؟</p>
+                        <input type="text" placeholder="اكتبي هديتك هنا..." class="answer-input">
+                        <button class="unlock-photo-btn" id="fav-gift-btn">افتحي الصورة ✨</button>
+                    </div>
+                </div>
+                <div class="secret-image-box">
+                    <img src="secret3.png" class="blurred-photo" alt="صورة سرية 3">
+                    <div class="quiz-overlay">
+                        <p>أكتر كلمة بنقولها لبعض لما بنبقى زعلانين؟</p>
+                        <input type="text" placeholder="اكتبي الإجابة..." class="answer-input">
+                        <button class="unlock-photo-btn" data-answer="بحبك,حبيبتي,ماليش">افتحي الصورة ✨</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15. جدول الدلع وكروت المسح (5 كروت) -->
+        <section class="spoiling-schedule section-padding">
+            <h2 class="section-title elegant-font">جدول يوم عيد ميلادك 🎟️</h2>
+            <p class="instruction">امسحي البطاقات عشان تعرفي مجهزالك إيه النهاردة!</p>
+            <div class="scratch-cards-wrapper">
+                
+                <div class="scratch-card">
+                    <div class="gift-content">
+                        <h3>بعد النوم 😴</h3>
+                        <p>قهوة تروق عليك وبعدها شور وحمام مغربي 🛁</p>
+                    </div>
+                    <canvas id="scratch-1" class="scratch-canvas"></canvas>
+                </div>
+                
+                <div class="scratch-card">
+                    <div class="gift-content">
+                        <h3>الصباح ☕️💄</h3>
+                        <p>فطور مميز وجلسة عناية بالبشرة والشعر (Spa)!</p>
+                    </div>
+                    <canvas id="scratch-2" class="scratch-canvas"></canvas>
+                </div>
+                
+                <div class="scratch-card">
+                    <div class="gift-content">
+                        <h3>بعد الظهر 🍽️</h3>
+                        <p>غداء خفيف ومميز 🥩✨</p>
+                    </div>
+                    <canvas id="scratch-3" class="scratch-canvas"></canvas>
+                </div>
+                
+                <div class="scratch-card">
+                    <div class="gift-content">
+                        <h3>المساء 🛍️✨</h3>
+                        <p>شوبينج وعشاء فاخر في مكانك المفضل!</p>
+                    </div>
+                    <canvas id="scratch-4" class="scratch-canvas"></canvas>
+                </div>
+                
+                <!-- البطاقة الخامسة -->
+                <div class="scratch-card">
+                    <div class="gift-content">
+                        <h3>قبل النوم 🌙</h3>
+                        <p>بوسه على راس مامتك وباباك على انهم جابوكي على الدنيا ❤️</p>
+                    </div>
+                    <canvas id="scratch-5" class="scratch-canvas"></canvas>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 16. عجلة الحظ السحرية (6 هدايا) -->
+        <section class="royal-gift section-padding">
+            <div class="gift-box aesthetic-border">
+                <h2 class="section-title elegant-font">🎁 الصندوق السري الأخير</h2>
+                <p class="instruction" id="wheel-instruction">اضغطي على الزر عشان تلفي العجلة وتعرفي هديتك!</p>
+                
+                <button id="openGift" class="magic-btn">افتحي الهدية ولُفي العجلة ✨</button>
+                
+                <div id="wheel-container" class="hidden">
+                    <div class="pointer">▼</div>
+                    <div class="wheel" id="wheel">
+                        <div class="segment" style="--i:1"><span>شوكولاتة بالفسدق 🍫</span></div>
+                        <div class="segment" style="--i:2"><span>ميكب من اختيارك 💄</span></div>
+                        <div class="segment" style="--i:3"><span>خروجة حلوة ☕</span></div>
+                        <div class="segment" style="--i:4"><span>بوكيه ورد 💐</span></div>
+                        <!-- تم إضافة id="dynamic-gift-text" عشان الهدية تتكتب هنا تلقائيًا -->
+                        <div class="segment" style="--i:5"><span id="dynamic-gift-text">هدية مفاجأة 🎁</span></div>
+                        <div class="segment" style="--i:6"><span>ولا شي 😜</span></div>
+                    </div>
+                    <div class="wheel-center"></div>
+                </div>
+                
+                <div id="giftMessage" class="hidden">
+                    <h3 id="won-gift"></h3>
+                    <hr class="elegant-divider">
+                    <p class="final-love">وأحلى نعمة رزقني بيها ربنا هي إنك صاحبتي وأختي 💛</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 17. الوعود والرسالة الصوتية -->
+        <section class="final-promises section-padding">
+            <div class="promise-box">
+                <h2 class="section-title elegant-font">وعد مني ليكِ 💌</h2>
+                <ul class="promises-list">
+                    <li><i class="fa-solid fa-heart"></i> أوعدك أفضل أسمعك حتى لو حكيتِ نفس القصة 100 مرة.</li>
+                    <li><i class="fa-solid fa-heart"></i> أوعدك أقف جنبك في كل قراراتك (حتى المجنونة منها).</li>
+                    <li><i class="fa-solid fa-heart"></i> هنفضل سند وأخوات لحد ما نعجز ونفكر بعض بمصايبنا ونضحك. 👵👵</li>
+                </ul>
+                <hr class="elegant-divider">
+                <p class="final-love">كل سنة وأنتِ أجدع صاحبة وأحن أخت يا<strong>مريم</strong>. ربنا يديمك نعمة في حياتي! ♾️💛</p>
+                
+                <!-- الزر النهائي للإعجاب -->
+                <button class="like-btn final-like"><i class="fa-regular fa-heart"></i></button>
+                
+                <!-- مشغل الرسالة الصوتية -->
+                <div class="voice-note-section">
+                    <audio id="my-voice" src="voice-message.mp3"></audio>
+                    <button id="play-voice" class="play-voice-btn">
+                        <i class="fa-solid fa-microphone-lines"></i> اسمعي رسالتي ليكِ
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- الفوتر -->
+        <footer>
+            <p>صُنع بكل الحب لأجمل مريم في الكون ✨ &copy; 2026</p>
+        </footer>
+
+    </div><!-- نهاية المحتوى الرئيسي -->
+
+    <!-- مكتبة الكونفيتي (للانفجارات السحرية) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- ملف الجافاسكريبت -->
+    <script src="script.js"></script>
+</body>
+</html>
