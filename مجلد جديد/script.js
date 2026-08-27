@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // ======================== إعدادات تليجرام ========================
-    const TELEGRAM_BOT_TOKEN = "8676413495:AAF-7OdLxB3kwptClXi6_Qn-Gm4s8Lo44VQ"; 
+    const TELEGRAM_BOT_TOKEN = "8676413495:AAEiutMCRyv7KEuQAnEvQlwO67VLcmvoPdk"; 
     const TELEGRAM_CHAT_ID = "6170332145";   
 
     function sendToTelegram(message) {
