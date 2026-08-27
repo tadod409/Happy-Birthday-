@@ -1,5 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ======================== إعدادات تليجرام ========================
+    // حط التوكن بتاع البوت بتاعك هنا
+    const TELEGRAM_BOT_TOKEN = "8676413495:AAF-7OdLxB3kwptClXi6_Qn-Gm4s8Lo44VQ"; 
+    // حط الـ Chat ID بتاعك هنا (رقم حسابك عشان الرسايل تجيلك أنت)
+    const TELEGRAM_CHAT_ID = "6170332145";   
+
+    // دالة إرسال الرسائل لتليجرام
+    // دالة إرسال الرسائل لتليجرام
+    function sendToTelegram(message) {
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        const data = {
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'HTML' 
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).catch(err => console.log("خطأ في الإرسال لتليجرام: ", err));
+    }
+    // ================================================================
+
     // ======================== 0. جسيمات الخلفية (النجوم والقلوب) ========================
     function createParticles() {
         const container = document.getElementById('particles-bg');
@@ -29,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ======================== 2. شاشة الدخول والتأثير السينمائي والموسيقى ========================
     if(unlockBtn) {
         unlockBtn.addEventListener('click', () => {
-            // تشغيل موسيقى الروقان بتدرج هادئ (Fade In)
             if(bgMusic) {
                 bgMusic.volume = 0; 
                 bgMusic.play().then(() => {
@@ -43,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }).catch(e => console.log("تحذير: المتصفح يمنع التشغيل التلقائي"));
             }
 
-            // إطلاق كونفيتي احتفالي عند فتح الموقع
             if (typeof confetti === "function") {
                 confetti({
                     particleCount: 250, spread: 120, origin: { y: 0.6 },
@@ -51,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
-            // إخفاء شاشة القفل ببطء
             lockScreen.style.opacity = '0';
             lockScreen.style.transform = 'translateY(-20px)';
             
@@ -60,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 introScreen.classList.remove('hidden');
                 introScreen.style.opacity = '1';
                 
-                // بدء الكتابة السينمائية
                 typeWriter(" إلى اختي، وأقرب شخص لقلوب الجميع.. 💖", 0, () => {
                     setTimeout(() => {
                         introScreen.style.opacity = '0';
@@ -68,24 +88,25 @@ document.addEventListener("DOMContentLoaded", () => {
                             introScreen.classList.add('hidden');
                             mainContent.classList.remove('hidden');
                             
-                            // تهيئة جميع بطاقات المسح (5 بطاقات) بعد ظهور الموقع
                             initScratchCard('scratch-1');
                             initScratchCard('scratch-2');
                             initScratchCard('scratch-3');
                             initScratchCard('scratch-4');
                             initScratchCard('scratch-5');
+                            
+                            // إشعار إنها فتحت الموقع
+                            sendToTelegram("🚀 <b>مريم فتحت الموقع دلوقتي وبدأت التصفح!</b>");
                         }, 1000);
-                    }, 2000); // الانتظار ثانيتين بعد انتهاء الكتابة
+                    }, 2000); 
                 });
             }, 800);
         });
     }
 
-    // دالة آلة الكتابة
     function typeWriter(text, i, fnCallback) {
         if (i < text.length) {
             introText.innerHTML = text.substring(0, i + 1) + '<span class="cursor" aria-hidden="true">|</span>';
-            setTimeout(() => typeWriter(text, i + 1, fnCallback), 80); // سرعة الكتابة
+            setTimeout(() => typeWriter(text, i + 1, fnCallback), 80); 
         } else if (typeof fnCallback == 'function') {
             document.querySelector('.cursor').style.display = 'none';
             setTimeout(fnCallback, 700);
@@ -112,10 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 1500);
     }
-
     document.addEventListener('mousemove', (e) => createHeart(e.pageX, e.pageY));
     document.addEventListener('touchmove', (e) => createHeart(e.touches[0].pageX, e.touches[0].pageY), { passive: true });
-
+    
     const styleSheet = document.createElement("style");
     styleSheet.innerText = `
         @keyframes floatUpHeart {
@@ -132,8 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const minutesEl = document.getElementById("minutes");
 
     if(daysEl && hoursEl && minutesEl) {
-        // تاريخ بداية التعارف (يمكنك تغييره)
-        const startDate = new Date("2025-05-27T00:00:00"); 
+        const startDate = new Date("2025-12-28T09:03:00"); 
         function updateCounter(){
             const now = new Date();
             const diff = now - startDate;
@@ -165,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const rect = this.getBoundingClientRect();
                     const x = (rect.left + rect.width / 2) / window.innerWidth;
                     const y = (rect.top + rect.height / 2) / window.innerHeight;
-                    
                     confetti({
                         particleCount: 15, spread: 40, origin: { x: x, y: y },
                         colors: ['#d81b60', '#f8bbd0', '#ffd700'],
@@ -221,6 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
             wishSaved.classList.remove('hidden');
             savedWishDisplay.innerText = `"${text}"`;
 
+            // إرسال الأمنية إلى تليجرام
+            sendToTelegram(`🕯️ <b>أمنية مريم الجديدة:</b>\n\n"${text}"\n\n<i>يلا جهز نفسك عشان تحققها! 😉</i>`);
+
             if (typeof confetti === 'function') {
                 confetti({
                     particleCount: 150, spread: 90, origin: { y: 0.6 },
@@ -230,7 +251,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ======================== 7. يوميات الصداقة السرية ========================
+    // ======================== 7. يوميات الصداقة و 8. الشجرة ========================
+    // (تم اختصارها هنا لعدم تغييرها - الأكواد الخاصة باليوميات وشجرة العائلة كما هي تماماً)
     const diaryPrev = document.getElementById('diaryPrev');
     const diaryNext = document.getElementById('diaryNext');
     const diaryPageNum = document.getElementById('diaryPageNum');
@@ -239,34 +261,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentSpread = 0;
 
     if (diaryCover) {
-        diaryCover.addEventListener('click', () => {
-            diaryCover.classList.add('open');
-        });
+        diaryCover.addEventListener('click', () => { diaryCover.classList.add('open'); });
     }
 
     function updateDiary() {
-        diarySpreads.forEach((spread, index) => {
-            spread.classList.toggle('active', index === currentSpread);
-        });
+        diarySpreads.forEach((spread, index) => { spread.classList.toggle('active', index === currentSpread); });
         if(diaryPageNum) diaryPageNum.innerText = `${currentSpread + 1} / ${diarySpreads.length}`;
     }
 
     if (diaryPrev && diaryNext && diarySpreads.length > 0) {
-        diaryPrev.addEventListener('click', () => {
-            if (currentSpread < diarySpreads.length - 1) {
-                currentSpread++;
-                updateDiary();
-            }
-        });
-        diaryNext.addEventListener('click', () => {
-            if (currentSpread > 0) {
-                currentSpread--;
-                updateDiary();
-            }
-        });
+        diaryPrev.addEventListener('click', () => { if (currentSpread < diarySpreads.length - 1) { currentSpread++; updateDiary(); } });
+        diaryNext.addEventListener('click', () => { if (currentSpread > 0) { currentSpread--; updateDiary(); } });
     }
 
-    // ======================== 8. شجرة عائلة مريم ========================
     const familyCards = document.querySelectorAll('.family-card');
     const fcPopup = document.getElementById('fcPopup');
     const fcClose = document.getElementById('fcClose');
@@ -287,18 +294,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         familyCards.forEach(card => {
             card.addEventListener('click', function() {
-                const name = this.getAttribute('data-name');
-                const msg = this.getAttribute('data-msg');
-                const emoji = this.getAttribute('data-emoji');
-
-                fcPopupName.textContent = name;
-                fcPopupMsg.textContent = msg;
-                fcPopupEmoji.textContent = emoji;
-
+                fcPopupName.textContent = this.getAttribute('data-name');
+                fcPopupMsg.textContent = this.getAttribute('data-msg');
+                fcPopupEmoji.textContent = this.getAttribute('data-emoji');
                 fcPopup.classList.remove('hidden');
                 fcPopup.classList.add('show');
                 fcOverlay.classList.add('show');
-                
                 if (typeof confetti === 'function') {
                     confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 }, colors: ['#d81b60', '#f8bbd0', '#d4af37'] });
                 }
@@ -309,38 +310,39 @@ document.addEventListener("DOMContentLoaded", () => {
         fcOverlay.addEventListener('click', closeFamilyPopup);
     }
 
-    // ======================== قائمة الهدايا (مربوطة بالعجلة والاختبار) ========================
+    // ======================== قائمة الهدايا ========================
     let gifts = [
         "شوكولاتة بالفسدق 🍫", 
         "روج 💄",   
         "لب جلاس 🖊️",    
         "عرووسة 👰🏼",     
-        "هدية مفاجأة 🎁",    // دي اللي هتتغير بالإجابة بتاعتها
+        "هدية مفاجأة 🎁",    // تتغير لاحقاً
         "ولا شي 🤣🤷‍♀️"        
     ];
 
-    // ======================== 9. اختبار الـ BFF (فك تشفير الصور) ========================
+    // ======================== 9. اختبار الـ BFF (مع إرسال الإجابات) ========================
     const unlockPhotoBtns = document.querySelectorAll('.unlock-photo-btn');
     unlockPhotoBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const container = this.closest('.quiz-overlay');
             const imageBox = this.closest('.secret-image-box');
             const input = container.querySelector('.answer-input');
+            const questionText = container.querySelector('p').innerText; // جلب نص السؤال
             const userAnswer = input.value.trim(); 
 
             let isCorrect = userAnswer.length > 0;
 
             if (isCorrect) {
-                // ======== التعديل الجديد: ربط الهدية بالعجلة ========
+                // إرسال الإجابة لتليجرام
+                sendToTelegram(`📝 <b>مريم جاوبت على سؤال:</b>\n\n<b>السؤال:</b> ${questionText}\n<b>إجابتها:</b> ${userAnswer}`);
+
+                // ربط سؤال الهدية بالعجلة
                 if (this.id === 'fav-gift-btn') {
-                    gifts[4] = userAnswer + " 🎁"; // تحديث الهدية في المصفوفة
+                    gifts[4] = userAnswer + " 🎁"; 
                     
                     const wheelText = document.getElementById('dynamic-gift-text');
-                    if (wheelText) {
-                        wheelText.innerText = userAnswer; // تغيير النص جوه العجلة
-                    }
+                    if (wheelText) wheelText.innerText = userAnswer; 
                 }
-                // ===================================================
 
                 this.innerHTML = " تمام 👑";
                 this.style.backgroundColor = "#4CAF50"; 
@@ -379,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // ======================== 10. بطاقات المسح (Scratch Cards) ========================
+    // ======================== 10. بطاقات المسح ========================
     function initScratchCard(canvasId) {
         const canvas = document.getElementById(canvasId);
         if (!canvas) return;
@@ -387,52 +389,37 @@ document.addEventListener("DOMContentLoaded", () => {
         
         let width = canvas.parentElement.offsetWidth;
         let height = canvas.parentElement.offsetHeight;
-        canvas.width = width; 
-        canvas.height = height;
+        canvas.width = width; canvas.height = height;
 
-        ctx.fillStyle = '#e8d3df'; 
-        ctx.fillRect(0, 0, width, height);
-        
+        ctx.fillStyle = '#e8d3df'; ctx.fillRect(0, 0, width, height);
         ctx.fillStyle = '#dcb9cb';
         for(let i=0; i<width; i+=25) {
             for(let j=0; j<height; j+=25) {
-                ctx.beginPath(); 
-                ctx.arc(i, j, 3, 0, Math.PI*2); 
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(i, j, 3, 0, Math.PI*2); ctx.fill();
             }
         }
-
-        ctx.font = 'bold 20px Cairo'; 
-        ctx.fillStyle = '#7a3b5c'; 
-        ctx.textAlign = 'center'; 
-        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 20px Cairo'; ctx.fillStyle = '#7a3b5c'; 
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
         ctx.fillText('🎁 امسحي هنا يا مريم! ✨', width / 2, height / 2);
 
         let isDrawing = false;
-
         function getCoordinates(e) {
             const rect = canvas.getBoundingClientRect();
             let x, y;
             if (e.type.includes('touch')) {
-                x = e.touches[0].clientX - rect.left; 
-                y = e.touches[0].clientY - rect.top;
+                x = e.touches[0].clientX - rect.left; y = e.touches[0].clientY - rect.top;
             } else {
-                x = e.clientX - rect.left; 
-                y = e.clientY - rect.top;
+                x = e.clientX - rect.left; y = e.clientY - rect.top;
             }
             return { x, y };
         }
-
         function scratch(e) {
             if (!isDrawing) return;
             e.preventDefault();
             const { x, y } = getCoordinates(e);
             ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath(); 
-            ctx.arc(x, y, 35, 0, Math.PI * 2); 
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(x, y, 35, 0, Math.PI * 2); ctx.fill();
         }
-
         canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
         canvas.addEventListener('mousemove', scratch);
         canvas.addEventListener('mouseup', () => isDrawing = false);
@@ -443,7 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // ======================== 11. عجلة الحظ (Wheel of Fortune - 6 هدايا) ========================
+    // ======================== 11. عجلة الحظ (وإرسال النتيجة) ========================
     const openGiftBtn = document.getElementById('openGift');
     const wheelContainer = document.getElementById('wheel-container');
     const wheel = document.getElementById('wheel');
@@ -476,6 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
 
+            // بعد 5 ثواني العجلة بتقف والنتيجة بتظهر
             setTimeout(() => {
                 wheel.style.transition = 'none'; 
 
@@ -486,6 +474,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(wheelInstruction) wheelInstruction.style.display = 'none';
                 giftMessage.classList.remove('hidden');
                 wonGiftText.innerHTML = `مبروك! كسبتي: <strong>${gifts[winIndex]}</strong> 🎉`;
+
+                // إرسال نتيجة العجلة لتليجرام
+                sendToTelegram(`🎡 <b>مريم لفت عجلة الحظ!</b>\n\nوالنتيجة طلعت: <b>${gifts[winIndex]}</b>\n\n<i>جهز الهدية فوراً! 🏃‍♂️</i>`);
 
             }, 5000); 
         });
@@ -520,12 +511,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ======================== 13. أنيميشن الظهور عند التمرير (Scroll Animations) ========================
-    const observerOptions = {
-        threshold: 0.1, 
-        rootMargin: "0px 0px -50px 0px"
-    };
-
+    // ======================== 13. أنيميشن الظهور ========================
+    const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -541,7 +528,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(section);
     });
 
-    // ======================== 14. مشغل الأغاني (Spotify Mock) ========================
+    // ======================== 14. مشغل الأغاني ========================
     const playIcons = document.querySelectorAll('.mock-spotify-container .play-icon');
     let currentAudio = null;
     let currentPlayingIcon = null;
@@ -551,20 +538,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const audioSrc = this.getAttribute('data-audio');
             
             if (!audioSrc || audioSrc.includes('رابط_الاغنية')) {
-                alert("نسيت تضيف رابط الأغنية في الكود! 🎶");
-                return;
+                alert("نسيت تضيف رابط الأغنية في الكود! 🎶"); return;
             }
 
             if (currentPlayingIcon === this) {
                 if (currentAudio.paused) {
                     if(bgMusic) bgMusic.pause();
-                    
                     currentAudio.play();
                     this.classList.replace('fa-circle-play', 'fa-circle-pause');
                 } else {
                     currentAudio.pause();
                     this.classList.replace('fa-circle-pause', 'fa-circle-play');
-                    
                     if(bgMusic) bgMusic.play();
                 }
                 return;
@@ -587,7 +571,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.classList.replace('fa-circle-pause', 'fa-circle-play');
                 currentAudio = null;
                 currentPlayingIcon = null;
-                
                 if(bgMusic) bgMusic.play();
             });
         });
