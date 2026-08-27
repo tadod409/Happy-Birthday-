@@ -1,13 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // ======================== إعدادات تليجرام ========================
-    // حط التوكن بتاع البوت بتاعك هنا
     const TELEGRAM_BOT_TOKEN = "8676413495:AAF-7OdLxB3kwptClXi6_Qn-Gm4s8Lo44VQ"; 
-    // حط الـ Chat ID بتاعك هنا (رقم حسابك عشان الرسايل تجيلك أنت)
     const TELEGRAM_CHAT_ID = "6170332145";   
 
-    // دالة إرسال الرسائل لتليجرام
-    // دالة إرسال الرسائل لتليجرام
     function sendToTelegram(message) {
         const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
         const data = {
@@ -94,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             initScratchCard('scratch-4');
                             initScratchCard('scratch-5');
                             
-                            // إشعار إنها فتحت الموقع
                             sendToTelegram("🚀 <b>مريم فتحت الموقع دلوقتي وبدأت التصفح!</b>");
                         }, 1000);
                     }, 2000); 
@@ -113,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ======================== 3. الماوس السحري (قلوب متطايرة) ========================
+    // ======================== 3. الماوس السحري ========================
     let lastHeartTime = 0;
     function createHeart(x, y) {
         if (Date.now() - lastHeartTime < 60) return; 
@@ -152,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const minutesEl = document.getElementById("minutes");
 
     if(daysEl && hoursEl && minutesEl) {
-        const startDate = new Date("2025-12-28T09:03:00"); 
+        const startDate = new Date("2025-05-27T00:00:00"); 
         function updateCounter(){
             const now = new Date();
             const diff = now - startDate;
@@ -239,7 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
             wishSaved.classList.remove('hidden');
             savedWishDisplay.innerText = `"${text}"`;
 
-            // إرسال الأمنية إلى تليجرام
             sendToTelegram(`🕯️ <b>أمنية مريم الجديدة:</b>\n\n"${text}"\n\n<i>يلا جهز نفسك عشان تحققها! 😉</i>`);
 
             if (typeof confetti === 'function') {
@@ -251,8 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ======================== 7. يوميات الصداقة و 8. الشجرة ========================
-    // (تم اختصارها هنا لعدم تغييرها - الأكواد الخاصة باليوميات وشجرة العائلة كما هي تماماً)
+    // ======================== 7. يوميات الصداقة ========================
     const diaryPrev = document.getElementById('diaryPrev');
     const diaryNext = document.getElementById('diaryNext');
     const diaryPageNum = document.getElementById('diaryPageNum');
@@ -274,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
         diaryNext.addEventListener('click', () => { if (currentSpread > 0) { currentSpread--; updateDiary(); } });
     }
 
+    // ======================== 8. شجرة عائلة مريم ========================
     const familyCards = document.querySelectorAll('.family-card');
     const fcPopup = document.getElementById('fcPopup');
     const fcClose = document.getElementById('fcClose');
@@ -316,30 +310,27 @@ document.addEventListener("DOMContentLoaded", () => {
         "روج 💄",   
         "لب جلاس 🖊️",    
         "عرووسة 👰🏼",     
-        "هدية مفاجأة 🎁",    // تتغير لاحقاً
+        "هدية مفاجأة 🎁",    
         "ولا شي 🤣🤷‍♀️"        
     ];
 
-    // ======================== 9. اختبار الـ BFF (مع إرسال الإجابات) ========================
+    // ======================== 9. اختبار الـ BFF ========================
     const unlockPhotoBtns = document.querySelectorAll('.unlock-photo-btn');
     unlockPhotoBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const container = this.closest('.quiz-overlay');
             const imageBox = this.closest('.secret-image-box');
             const input = container.querySelector('.answer-input');
-            const questionText = container.querySelector('p').innerText; // جلب نص السؤال
+            const questionText = container.querySelector('p').innerText; 
             const userAnswer = input.value.trim(); 
 
             let isCorrect = userAnswer.length > 0;
 
             if (isCorrect) {
-                // إرسال الإجابة لتليجرام
                 sendToTelegram(`📝 <b>مريم جاوبت على سؤال:</b>\n\n<b>السؤال:</b> ${questionText}\n<b>إجابتها:</b> ${userAnswer}`);
 
-                // ربط سؤال الهدية بالعجلة
                 if (this.id === 'fav-gift-btn') {
                     gifts[4] = userAnswer + " 🎁"; 
-                    
                     const wheelText = document.getElementById('dynamic-gift-text');
                     if (wheelText) wheelText.innerText = userAnswer; 
                 }
@@ -379,7 +370,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
 
     // ======================== 10. بطاقات المسح ========================
     function initScratchCard(canvasId) {
@@ -429,8 +419,7 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.addEventListener('touchend', () => isDrawing = false);
     }
 
-
-    // ======================== 11. عجلة الحظ (وإرسال النتيجة) ========================
+    // ======================== 11. عجلة الحظ ========================
     const openGiftBtn = document.getElementById('openGift');
     const wheelContainer = document.getElementById('wheel-container');
     const wheel = document.getElementById('wheel');
@@ -463,7 +452,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
 
-            // بعد 5 ثواني العجلة بتقف والنتيجة بتظهر
             setTimeout(() => {
                 wheel.style.transition = 'none'; 
 
@@ -475,41 +463,143 @@ document.addEventListener("DOMContentLoaded", () => {
                 giftMessage.classList.remove('hidden');
                 wonGiftText.innerHTML = `مبروك! كسبتي: <strong>${gifts[winIndex]}</strong> 🎉`;
 
-                // إرسال نتيجة العجلة لتليجرام
                 sendToTelegram(`🎡 <b>مريم لفت عجلة الحظ!</b>\n\nوالنتيجة طلعت: <b>${gifts[winIndex]}</b>\n\n<i>جهز الهدية فوراً! 🏃‍♂️</i>`);
 
             }, 5000); 
         });
     }
 
-    // ======================== 12. التحكم بالرسالة الصوتية والموسيقى ========================
+    // ======================== التحكم الشامل والذكي في كل الأصوات ========================
+    let isVoicePlaying = false;
+    let currentAudio = null;
+    let currentPlayingIcon = null;
+    let wasSongPlaying = false; // عشان الكود يفتكر هل كانت في أغنية شغالة قبل الرسالة ولا لأ
+
     const voiceNote = document.getElementById('my-voice');
     const playVoiceBtn = document.getElementById('play-voice');
-    let isVoicePlaying = false;
+    const playIcons = document.querySelectorAll('.mock-spotify-container .play-icon');
 
+    // أولاً: زر الرسالة الصوتية
     if (playVoiceBtn && voiceNote) {
         playVoiceBtn.addEventListener('click', () => {
             if (isVoicePlaying) {
+                // إيقاف الرسالة الصوتية يدوياً
                 voiceNote.pause();
                 playVoiceBtn.innerHTML = '<i class="fa-solid fa-microphone-lines"></i> اسمعي رسالتي ليكِ';
                 playVoiceBtn.classList.remove('playing');
-                if(bgMusic) bgMusic.play();
+                isVoicePlaying = false;
+
+                // لو كان فيه أغنية شغالة قبل الرسالة، نرجعها.. لو لأ نرجع الروقان (الخلفية)
+                if (wasSongPlaying && currentAudio) {
+                    currentAudio.play();
+                    if(currentPlayingIcon) currentPlayingIcon.classList.replace('fa-circle-play', 'fa-circle-pause');
+                } else {
+                    if(bgMusic) bgMusic.play();
+                }
             } else {
-                if(bgMusic) bgMusic.pause(); 
+                // المستخدم ضغط تشغيل الرسالة الصوتية
+                if(bgMusic) bgMusic.pause(); // نكتم موسيقى الخلفية فوراً
+
+                // إيقاف أي أغنية من القائمة فوراً وتسجيل إنها كانت شغالة
+                wasSongPlaying = false;
+                if (currentAudio) {
+                    if (!currentAudio.paused) {
+                        wasSongPlaying = true;
+                    }
+                    currentAudio.pause(); // دي اللي هتسكت الأغنية أثناء الرسالة
+                    if(currentPlayingIcon) currentPlayingIcon.classList.replace('fa-circle-pause', 'fa-circle-play');
+                }
+
+                // نشغل الرسالة بقوة
                 voiceNote.play();
                 playVoiceBtn.innerHTML = '<i class="fa-solid fa-circle-pause"></i> إيقاف مؤقت';
                 playVoiceBtn.classList.add('playing');
+                isVoicePlaying = true;
             }
-            isVoicePlaying = !isVoicePlaying;
         });
 
+        // لما الرسالة تخلص لوحدها للاّخر
         voiceNote.addEventListener('ended', () => {
             isVoicePlaying = false;
             playVoiceBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> اسمعيها تاني';
             playVoiceBtn.classList.remove('playing');
-            if(bgMusic) bgMusic.play(); 
+            
+            // استرجاع الصوت اللي كان شغال قبلها
+            if (wasSongPlaying && currentAudio) {
+                currentAudio.play();
+                if(currentPlayingIcon) currentPlayingIcon.classList.replace('fa-circle-play', 'fa-circle-pause');
+            } else {
+                if(bgMusic) bgMusic.play(); 
+            }
         });
     }
+
+    // ثانياً: مشغل أغاني الـ Playlist
+    playIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const audioSrc = this.getAttribute('data-audio');
+            
+            if (!audioSrc || audioSrc.includes('رابط_الاغنية')) {
+                alert("نسيت تضيف رابط الأغنية في الكود! 🎶"); 
+                return;
+            }
+
+            // لو الرسالة الصوتية كانت شغالة وضغطت على أغنية -> نوقف الرسالة ونلغي الأولوية بتاعتها
+            if (isVoicePlaying) {
+                voiceNote.pause();
+                isVoicePlaying = false;
+                wasSongPlaying = false; 
+                if(playVoiceBtn) {
+                    playVoiceBtn.innerHTML = '<i class="fa-solid fa-microphone-lines"></i> اسمعي رسالتي ليكِ';
+                    playVoiceBtn.classList.remove('playing');
+                }
+            }
+
+            // لو ضغطنا على نفس الأغنية الشغالة (إيقاف أو استكمال)
+            if (currentPlayingIcon === this) {
+                if (currentAudio.paused) {
+                    if(bgMusic) bgMusic.pause(); 
+                    currentAudio.play();
+                    this.classList.replace('fa-circle-play', 'fa-circle-pause');
+                } else {
+                    currentAudio.pause(); 
+                    this.classList.replace('fa-circle-pause', 'fa-circle-play');
+                    // رجوع موسيقى الخلفية
+                    if(bgMusic) bgMusic.play();
+                }
+                return;
+            }
+
+            // لو كانت في أغنية تانية شغالة، نوقفها الأول
+            if (currentAudio) {
+                currentAudio.pause();
+                if(currentPlayingIcon) {
+                    currentPlayingIcon.classList.replace('fa-circle-pause', 'fa-circle-play');
+                }
+            }
+
+            // نكتم الخلفية
+            if(bgMusic) bgMusic.pause();
+
+            currentAudio = new Audio(audioSrc);
+            currentAudio.play();
+            
+            this.classList.replace('fa-circle-play', 'fa-circle-pause');
+            currentPlayingIcon = this;
+
+            // لما الأغنية تخلص
+            currentAudio.addEventListener('ended', () => {
+                this.classList.replace('fa-circle-pause', 'fa-circle-play');
+                currentAudio = null;
+                currentPlayingIcon = null;
+                
+                // نرجع موسيقى الخلفية بشرط إن الرسالة الصوتية متكونش شغالة
+                if (!isVoicePlaying && bgMusic) {
+                    bgMusic.play();
+                }
+            });
+        });
+    });
 
     // ======================== 13. أنيميشن الظهور ========================
     const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
@@ -528,51 +618,4 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(section);
     });
 
-    // ======================== 14. مشغل الأغاني ========================
-    const playIcons = document.querySelectorAll('.mock-spotify-container .play-icon');
-    let currentAudio = null;
-    let currentPlayingIcon = null;
-
-    playIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const audioSrc = this.getAttribute('data-audio');
-            
-            if (!audioSrc || audioSrc.includes('رابط_الاغنية')) {
-                alert("نسيت تضيف رابط الأغنية في الكود! 🎶"); return;
-            }
-
-            if (currentPlayingIcon === this) {
-                if (currentAudio.paused) {
-                    if(bgMusic) bgMusic.pause();
-                    currentAudio.play();
-                    this.classList.replace('fa-circle-play', 'fa-circle-pause');
-                } else {
-                    currentAudio.pause();
-                    this.classList.replace('fa-circle-pause', 'fa-circle-play');
-                    if(bgMusic) bgMusic.play();
-                }
-                return;
-            }
-
-            if (currentAudio) {
-                currentAudio.pause();
-                currentPlayingIcon.classList.replace('fa-circle-pause', 'fa-circle-play');
-            }
-
-            if(bgMusic) bgMusic.pause();
-
-            currentAudio = new Audio(audioSrc);
-            currentAudio.play();
-            
-            this.classList.replace('fa-circle-play', 'fa-circle-pause');
-            currentPlayingIcon = this;
-
-            currentAudio.addEventListener('ended', () => {
-                this.classList.replace('fa-circle-pause', 'fa-circle-play');
-                currentAudio = null;
-                currentPlayingIcon = null;
-                if(bgMusic) bgMusic.play();
-            });
-        });
-    });
 });
